@@ -21,21 +21,17 @@
       border-radius: 12px; box-shadow: 0 0 8px #000;
     }
     button {
-      margin-left: 0.5rem; border: none; cursor: pointer;
+      border: none; cursor: pointer;
       padding: 0.5rem 0.8rem; border-radius: 8px;
       background: #00b3ff; color: #000; font-weight: 600;
       transition: 0.2s;
     }
     button:hover { background: #33c3ff; }
-    video {
-      width: 100%; border-radius: 12px; margin-top: 1rem; display: none;
-    }
   </style>
 </head>
 <body>
   <h1>📺 One TV – NR Network</h1>
   <div id="channels">Loading channels…</div>
-  <video id="player" controls></video>
 
   <script>
     async function loadChannels() {
@@ -53,20 +49,9 @@
         div.className = "channel";
         div.innerHTML = `
           <span>${title}</span>
-          <div>
-            <button onclick="play('${url}')">🎬 Play</button>
-            <button onclick="copy('${url}')">📋 Copy</button>
-          </div>`;
+          <button onclick="copy('${url}')">📋 Copy</button>`;
         container.appendChild(div);
       });
-    }
-
-    function play(url) {
-      const v = document.getElementById("player");
-      v.src = url;
-      v.style.display = "block";
-      v.play();
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
 
     function copy(url) {
