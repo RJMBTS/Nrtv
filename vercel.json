@@ -1,8 +1,17 @@
 {
+  "version": 2,
   "rewrites": [
     {
       "source": "/onetv.m3u",
       "destination": "/api/onetv"
+    },
+    {
+      "source": "/api/m3u8",
+      "destination": "/api/m3u8.js"
+    },
+    {
+      "source": "/",
+      "destination": "/public/index.html"
     }
   ]
 }
