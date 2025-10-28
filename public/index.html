@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d0d0d" />
+  <title>One TV – NR Network</title>
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      background: #0d0d0d;
+      color: #eee;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      margin: 0; padding: 1rem;
+    }
+    h1 { text-align: center; color: #00b3ff; }
+    .channel {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #1a1a1a; padding: 0.75rem 1rem; margin: 0.5rem 0;
+      border-radius: 12px; box-shadow: 0 0 8px #000;
+    }
+    button {
+      margin-left: 0.5rem; border: none; cursor: pointer;
+      padding: 0.5rem 0.8rem; border-radius: 8px;
+      background: #00b3ff; color: #000; font-weight: 600;
+      transition: 0.2s;
+    }
+    button:hover { background: #33c3ff; }
+    video {
+      width: 100%; border-radius: 12px; margin-top: 1rem; display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>📺 One TV – NR Network</h1>
+  <div id="channels">Loading channels…</div>
+  <video id="player" controls></video>
+
+  <script>
+    async function loadChannels() {
+      const res = await fetch("/api/m3u8");
+      const text = await res.text();
+
+      // Parse EXTINF entries
+      const matches = [...text.matchAll(/#EXTINF:-1,(.*)\n(https?:\/\/[^\s]+)/g)];
+      const container = document.getElementById("channels");
+      container.innerHTML = "";
+      matches.forEach(m => {
+        const title = m[1];
+        const url = m[2];
+        const div = document.createElement("div");
+        div.className = "channel";
+        div.innerHTML = `
+          <span>${title}</span>
+          <div>
+            <button onclick="play('${url}')">🎬 Play</button>
+            <button onclick="copy('${url}')">📋 Copy</button>
+          </div>`;
+        container.appendChild(div);
+      });
+    }
+
+    function play(url) {
+      const v = document.getElementById("player");
+      v.src = url;
+      v.style.display = "block";
+      v.play();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+
+    function copy(url) {
+      navigator.clipboard.writeText(url);
+      alert("Copied to clipboard:\n" + url);
+    }
+
+    // Auto refresh every 15 minutes
+    loadChannels();
+    setInterval(loadChannels, 15 * 60 * 1000);
+  </script>
+</body>
+</html>
