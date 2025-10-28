@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/onetv.m3u",
+      "destination": "/api/onetv"
+    }
+  ]
+}
