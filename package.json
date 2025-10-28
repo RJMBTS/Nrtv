@@ -1,0 +1,17 @@
+{
+  "name": "onetv-project",
+  "version": "1.0.0",
+  "description": "One TV – NR Network: Auto-updating M3U8 playlist and player dashboard.",
+  "scripts": {
+    "start": "vercel dev",
+    "build": "echo 'Vercel builds automatically'",
+    "deploy": "vercel --prod"
+  },
+  "author": "NR Network",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
