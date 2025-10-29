@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>One TV- NRTv Network</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #0d1117; color: #e6edf3; margin: 20px; }
+  h1 { text-align: center; color: #58a6ff; }
+  .channel { display: flex; justify-content: space-between; align-items: center;
+             background: #161b22; margin: 8px 0; padding: 10px; border-radius: 8px; }
+  button { background: #238636; color: white; border: none; border-radius: 5px; padding: 6px 10px; cursor: pointer; }
+  button:hover { background: #2ea043; }
+  .link { color: #58a6ff; text-decoration: none; word-break: break-all; }
+</style>
+</head>
+<body>
+<h1>📺 One TV Channel List</h1>
+<div id="list">Loading channels...</div>
+
+<script>
+async function loadChannels() {
+  const res = await fetch("/api/channels");
+  const data = await res.json();
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  if (!data.channels || data.channels.length === 0) {
+    list.innerHTML = "<p>No channels found.</p>";
+    return;
+  }
+
+  data.channels.forEach(ch => {
+    const name = ch.replace(/\s+/g, "_");
+    const url = `${window.location.origin}/api/${name}.m3u8`;
+    const div = document.createElement("div");
+    div.className = "channel";
+    div.innerHTML = `
+      <a href="${url}" class="link" target="_blank">${ch}</a>
+      <button onclick="copyLink('${url}')">📋 Copy</button>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function copyLink(link) {
+  navigator.clipboard.writeText(link);
+  alert("✅ Link copied:\n" + link);
+}
+
+loadChannels();
+</script>
+</body>
+</html>
