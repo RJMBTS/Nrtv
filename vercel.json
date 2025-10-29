@@ -6,4 +6,4 @@
   "routes": [
     { "src": "/onetv.m3u", "dest": "/api/onetv.js" }
   ]
-    }
+}
