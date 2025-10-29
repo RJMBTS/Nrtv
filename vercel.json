@@ -1,13 +1,20 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/*.js", "use": "@vercel/node" },
-    { "src": "index.html", "use": "@vercel/static" }
+    { "src": "api/*.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/onetv\\.m3u", "dest": "/api/onetv" },
-    { "src": "/([^/]+)\\.m3u8", "dest": "/api/channel?channel=$1" },
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/", "dest": "/index.html" }
+    {
+      "src": "/onetv\\.m3u$",
+      "dest": "/api/onetv"
+    },
+    {
+      "src": "/(.*)\\.m3u8$",
+      "dest": "/api/channel?channel=$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
   ]
 }
