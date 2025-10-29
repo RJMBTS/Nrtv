@@ -10,13 +10,5 @@
     "api/aupl.js": {
       "runtime": "nodejs18.x"
     }
-  },
-  "cron": {
-    "jobs": [
-      {
-        "path": "/api/aupl",
-        "schedule": "*/5 * * * *"
-      }
-    ]
   }
 }
