@@ -5,10 +5,5 @@
   ],
   "routes": [
     { "src": "/onetv.m3u", "dest": "/api/onetv.js" }
-  ],
-  "functions": {
-    "api/aupl.js": {
-      "runtime": "nodejs18.x"
+  ]
     }
-  }
-}
