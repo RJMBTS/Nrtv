@@ -6,8 +6,8 @@
   ],
   "routes": [
     { "src": "/", "dest": "/index.html" },
-    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/onetv\\.m3u", "dest": "/api/onetv.js" },
     { "src": "/([^/]+)\\.m3u8", "dest": "/api/channel?channel=$1" },
-    { "src": "/onetv\\.m3u", "dest": "/api/onetv.js" }
+    { "src": "/api/(.*)", "dest": "/api/$1" }
   ]
 }
