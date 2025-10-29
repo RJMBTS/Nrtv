@@ -26,3 +26,4 @@ export default async function handler(req, res) {
       .send(`#EXTM3U\n#EXTINF:-1,${channelName}\n#ERROR: Server Error (${err.message})`);
   }
 }
+
