@@ -5,9 +5,15 @@
     { "src": "index.html", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/onetv\\.m3u", "dest": "/api/onetv.js" },
-    { "src": "/([^/]+)\\.m3u8", "dest": "/api/channel?channel=$1" },
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/", "dest": "/index.html" },
+    {
+      "src": "/onetv.m3u",
+      "dest": "/api/onetv.js"
+    },
+    {
+      "src": "/([^/]+)\\.m3u8",
+      "dest": "/api/channel.js?channel=$1"
+    }
   ]
 }
