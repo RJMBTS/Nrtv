@@ -11,7 +11,7 @@
   "rewrites": [
     {
       "source": "/onetv.m3u",
-      "destination": "/api/onetv"
+      "destination": "/api/onetv.js"
     },
     {
       "source": "/api/m3u8",
